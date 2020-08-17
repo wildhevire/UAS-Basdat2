@@ -1,0 +1,80 @@
+<%- include('base/header') %>
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            Tambah Mahasiswa
+        </div>
+        <div class="card-body">
+            <ul class="nav nav-tabs nav-fill" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" href="#mahasiswa" role="tab" data-toggle="tab">Mahasiswa</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#dosen" role="tab" data-toggle="tab">Dosen</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#admin" role="tab" data-toggle="tab">Admin</a>
+            </li>
+          </ul>
+          
+          
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade show active" id="mahasiswa">
+                <form action="/auth/login/mahasiswa" method="POST">
+                    <div class="form-group">
+                        <label for="nim">NIM : </label>
+                        <input type="text" class="form-control" id="nim" name='nim'>
+                    </div>
+                    <div class="form-group">
+                        <label for="password_mahasiswa">Password :</label>
+                        <input type="password" class="form-control" id="password_mahasiswa" name='password_mahasiswa'>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+
+            </div>
+
+            <div role="tabpanel" class="tab-pane fade" id="dosen">
+                <form action="/auth/login/dosen" method="POST">
+                    <div class="form-group">
+                        <label for="nik">NIK : </label>
+                        <input type="text" class="form-control" id="nik" name='nik'>
+                    </div>
+                    <div class="form-group">
+                        <label for="password_dosen">Password :</label>
+                        <input type="password" class="form-control" id="password_dosen" name='password_dosen'>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+
+            <div role="tabpanel" class="tab-pane fade" id="admin">
+                <form action="/auth/login/admin" method="POST">
+                    <div class="form-group">
+                        <label for="username">Username : </label>
+                        <input type="text" class="form-control" id="username" name='username'>
+                    </div>
+                    <div class="form-group">
+                        <label for="password_admin">Password :</label>
+                        <input type="password" class="form-control" id="password_admin" name='password_admin'>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+
+            </div>
+          </div>
+        </div>
+    </div>          
+</div>
+
+<% if (typeof message != 'undefined') { %>
+  <h4 class="alert alert-danger mt-4"><%= message %></h4>
+<% } %>
+
+<% if (typeof isSucces != 'undefined') { %>
+  <h4 class="alert alert-success mt-4"><%= isSucces %></h4>
+<% } %>   
+
+<%- include('base/footer') %>
