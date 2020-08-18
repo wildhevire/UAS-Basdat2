@@ -1,4 +1,5 @@
 const express = require('express'),
+      bcrypt = require('bcryptjs'),
       moment = require('moment');
       db = require('../services/database');
       router =  express.Router();
@@ -21,7 +22,7 @@ addMahasiswa = (req, res) => {
     db.query('INSERT INTO mahasiswa SET ?', {nim : nim, nama : nama, password : password, email:email, tanggal_lahir:tanggal_lahir, alamat:alamat, admin_id:admin_id}, (err, result) => {
       if(err) console.log(err);
       else {
-        return res.render('addMahasiswa', {isSucces : 'Tambah Dosen Sukses'})
+        return res.redirect('/mahasiswa');
       }
     });
   });

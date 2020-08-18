@@ -1,4 +1,5 @@
 const express = require('express'),
+      bcrypt = require('bcryptjs'),
       moment = require('moment');
       db = require('../services/database');
       router =  express.Router();

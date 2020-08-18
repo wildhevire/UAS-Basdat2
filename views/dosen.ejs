@@ -31,7 +31,7 @@
                         <td><%= item.tanggal_lahirFormatted%></td>
                         <td><%= item.alamat%></td>
                         <td>
-                        <% if(userType == 'dosen' ||userType == 'admin') { %>
+                        <% if(userType == 'admin') { %>
                           <a href="javascript:void(0);" class="btn btn-sm btn-info edit" 
                             data-nip="<%= item.nip %>" 
                             data-nama="<%= item.nama %>"
@@ -72,7 +72,7 @@
      <div class="modal-dialog" role="document">
        <div class="modal-content">
          <div class="modal-header">
-           <h5 class="modal-title" id="exampleModalLabel">Add New Product</h5>
+           <h5 class="modal-title" id="exampleModalLabel">Tambah Dosen Baru</h5>
            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
              <span aria-hidden="true">&times;</span>
            </button>
@@ -94,7 +94,7 @@
                 <div class="input-group ">
                     <input type="text" class="form-control" id="password" name='password' required>
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" onclick="generatePassword('password')"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+                        <button class="btn btn-outline-secondary" type="button" onclick="generatePassword('password')">Random Password</button>
                     </div>
                 </div>
             </div>
@@ -144,7 +144,7 @@
            
             <div class="form-group">
                 <label for="nip">NIP : </label>
-                <input type="text" class="form-control nip" id="nip" name='nip' required>
+                <input type="text" class="form-control nip" id="nip" name='nip' readonly>
             </div>
             <div class="form-group">
                 <label for="nama">Nama :</label>
@@ -194,7 +194,7 @@
      <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-               <h5 class="modal-title" id="myModalLabel">Delete Product</h5>
+               <h5 class="modal-title" id="myModalLabel">Delete Data Dosen</h5>
                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
