@@ -4,12 +4,13 @@
         <li><a href="/">Home</a></li>
         <% if (typeof userType == 'undefined') { %>
             <li><a href="/login">Login</a></li>
+            <li><a href="/registerAdmin">Register Admin</a></li>
         <% } %>
         
         <% if (typeof userType != 'undefined' && userType == 'admin') { %>
-            <li><a href="/addMahasiswa">Tambah Mahasiswa</a></li>
-            <li><a href="/addDosen">Tambah Dosen</a></li>
-            <li><a href="/registerAdmin">Resgister Admin</a></li>
+            <li><a href="/mahasiswa">Mahasiswa</a></li>
+            <li><a href="/dosen">Dosen</a></li>
+            <li><a href="/matkul">Mata Kuliah</a></li>
         <% } %>
           
         <% if (typeof userType != 'undefined') { %>

@@ -1,0 +1,214 @@
+<%- include('base/header') %>
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            Daftar Dosen
+        </div>
+        <div class="card-body">
+            
+            <table class="table table-striped" id="mytable">
+                <thead>
+                  <tr>
+                    <th>NIP</th>
+                    <th>Nama</th>
+                    <!-- <th>Password</th> -->
+                    <th>Email</th>
+                    <th>Tempat Lahir</th>
+                    <th>Tanggal Lahir</th>
+                    <th>Alamat</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                   <% results.forEach((item) => { %>
+                     <tr>
+                        <td><%= item.nip%></td>
+                        <td><%= item.nama%></td>
+                        <!-- <td><%= item.password%></td> -->
+                        <td><%= item.email%></td>
+                        <td><%= item.tempat_lahir%></td>
+                        <td><%= item.tanggal_lahirFormatted%></td>
+                        <td><%= item.alamat%></td>
+                        <td>
+                        <% if(userType == 'dosen' ||userType == 'admin') { %>
+                          <a href="javascript:void(0);" class="btn btn-sm btn-info edit" 
+                            data-nip="<%= item.nip %>" 
+                            data-nama="<%= item.nama %>"
+                            data-password="<%= item.password %>" 
+                            data-email="<%= item.email %>"
+                            data-tempat_lahir="<%= item.tempat_lahir %>" 
+                            data-tanggal_lahir="<%= item.tanggal_lahir %>" 
+                            data-alamat="<%= item.alamat %>"
+                          >Edit</a>
+                          
+                          <a href="javascript:void(0);" class="btn btn-sm btn-danger delete" 
+                            data-nip="<%= item.nip %>"
+                          >Delete</a>
+                        <% } %>
+                        </td>
+                     </tr>
+                    <% }); %>
+                </tbody>
+
+              </table>
+              <button class="btn btn-success" data-toggle="modal" data-target="#myModalAdd">Tambah Dosen</button>
+    
+        </div>
+    </div> 
+    <% if (typeof message != 'undefined') { %>
+      <h4 class="alert alert-danger mt-4"><%= message %></h4>
+    <% } %>
+    
+    <% if (typeof isSucces != 'undefined') { %>
+      <h4 class="alert alert-success mt-4"><%= isSucces %></h4>
+    <% } %>   
+           
+</div>
+
+<!-- Add New Modal-->
+<form action="/auth/addDosen" method="post">
+    <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">Add New Product</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <div class="modal-body">
+
+            <div class="form-group">
+                <label for="nip">NIP : </label>
+                <input type="text" class="form-control" id="nip" name='nip' required>
+            </div>
+            <div class="form-group">
+                <label for="nama">Nama :</label>
+                <input type="text" class="form-control" id="nama" name='nama' required>
+            </div>
+            
+
+            <div class="form-group mb-3">
+                <label for="password">Password : </label>
+                <div class="input-group ">
+                    <input type="text" class="form-control" id="password" name='password' required>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" onclick="generatePassword('password')"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            
+
+
+            <div class="form-group">
+                <label for="nama">Email :</label>
+                <input type="email" class="form-control" id="email" name='email' required>
+            </div>
+            <div class="form-group">
+                <label for="tanggal_lahir">Tanggal Lahir :</label>
+                <input type="date" class="form-control" id="tanggal_lahir" name='tanggal_lahir' required>
+            </div>
+            <div class="form-group">
+                <label for="tempat_lahir">Tempat Lahir :</label>
+                <input type="text" class="form-control" id="tempat_lahir" name='tempat_lahir' required>
+            </div>
+            <div class="form-group">
+                <label for="alamat">Alamat :</label>
+                <input type="text" class="form-control" id="alamat" name='alamat' required>
+            </div>
+            
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+           <button type="submit" class="btn btn-primary">Save</button>
+         </div>
+       </div>
+     </div>
+    </div>
+</form>
+
+<!-- Edit Modal-->
+<form action="/updateDosen" method="post">
+    <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">Edit Dosen</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <div class="modal-body">
+           
+            <div class="form-group">
+                <label for="nip">NIP : </label>
+                <input type="text" class="form-control nip" id="nip" name='nip' required>
+            </div>
+            <div class="form-group">
+                <label for="nama">Nama :</label>
+                <input type="text" class="form-control nama" id="nama" name='nama' required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="password">Password : </label>
+                <div class="input-group " id ="show_hide_password">
+                    <input type="password" class="form-control password" id="password" name='password' required>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button"  ><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="nama">Email :</label>
+                <input type="email" class="form-control email" id="email" name='email' required>
+            </div>
+            <div class="form-group">
+                <label for="tanggal_lahir">Tanggal Lahir :</label>
+                <input type="date" class="form-control tanggal_lahir" id="tanggal_lahir" name='tanggal_lahir' required>
+            </div>
+            <div class="form-group">
+                <label for="tempat_lahir">Tempat Lahir :</label>
+                <input type="text" class="form-control tempat_lahir" id="tempat_lahir" name='tempat_lahir' required>
+            </div>
+            <div class="form-group">
+                <label for="alamat">Alamat :</label>
+                <input type="text" class="form-control alamat" id="alamat" name='alamat' required>
+            </div>
+
+         </div>
+         <div class="modal-footer">
+           <input type="hidden" name="id" class="product_id">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+           <button type="submit" class="btn btn-primary">Update</button>
+         </div>
+       </div>
+     </div>
+    </div>
+</form>
+
+<!-- Delete Product Modal-->
+<form id="add-row-form" action="/deleteDosen" method="post">
+  <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="myModalLabel">Delete Product</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                   <strong>Delete Dosen Tersebut?</strong>
+            </div>
+            <div class="modal-footer">
+                 <input type="hidden" name="nip" class="form-control nip" required>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                 <button type="submit" class="btn btn-success">Delete</button>
+            </div>
+         </div>
+     </div>
+  </div>
+</form>
+<%- include('base/dosenModal') %>
+<%- include('base/footer') %>
+   

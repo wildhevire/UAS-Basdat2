@@ -1,0 +1,20 @@
+<script>
+    $(document).ready(function(){
+			//showing data to modal for edit record
+      $('#mytable').on('click','.edit',function(){
+        var kode_matkul = $(this).data('kode_matkul');
+        var nama_matkul = $(this).data('nama_matkul');
+        $('#EditModal').modal('show');
+        $('.nama_matkul').val(nama_matkul);
+        $('.kode_matkul').val(kode_matkul);
+      });
+
+			//showing modal for delete record
+			$('#mytable').on('click','.delete',function(){
+        var kode_matakul = $(this).data('kode_matkul');
+        $('#DeleteModal').modal('show');
+        $('.kode_matkul2').val(kode_matakul);
+      });
+
+    });
+</script>

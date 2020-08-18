@@ -1,0 +1,135 @@
+<%- include('base/header') %>
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            Mata Kuliah
+        </div>
+        <div class="card-body">
+            
+            <table class="table table-striped" id="mytable">
+                <thead>
+                  <tr>
+                    <th>Kode Mata Kuliah</th>
+                    <th>Nama Mata Kuliah</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                   <% results.forEach((item) => { %>
+                     <tr>
+                        <td><%= item.kode_matkul%></td>
+                        <td><%= item.nama_matkul%></td>
+                        <td>
+                        <% if(userType == 'dosen' ||userType == 'admin') { %>
+                          <a href="javascript:void(0);" class="btn btn-sm btn-info edit" data-kode_matkul="<%= item.kode_matkul %>" data-nama_matkul="<%= item.nama_matkul %>">Edit</a>
+                          <a href="javascript:void(0);" class="btn btn-sm btn-danger delete" data-kode_matkul="<%= item.kode_matkul %>">Delete</a>
+                        <% } else if(userType = 'mahasiswa'){%>
+                          <a href="javascript:void(0);" class="btn btn-sm btn-danger delete" data-kode_matkul="<%= item.kode_matkul %>">Masuk</a>
+                        <% } %>
+                        </td>
+                     </tr>
+                    <% }); %>
+                </tbody>
+
+              </table>
+              <button class="btn btn-success" data-toggle="modal" data-target="#myModalAdd">Tambah Mata Kuliah</button>
+    
+        </div>
+    </div> 
+    <% if (typeof message != 'undefined') { %>
+      <h4 class="alert alert-danger mt-4"><%= message %></h4>
+    <% } %>
+    
+    <% if (typeof isSucces != 'undefined') { %>
+      <h4 class="alert alert-success mt-4"><%= isSucces %></h4>
+    <% } %>   
+           
+</div>
+
+<!-- Add New Matkul Modal-->
+<form action="/auth/addMatkul" method="post">
+    <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">Add New Product</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <div class="modal-body">
+
+            <div class="form-group">
+                <label for="kode_matkul">Kode Mata Kuliah :</label>
+                <input type="text" class="form-control" id="kode_matkul" name='kode_matkul'>
+            </div>
+            <div class="form-group mb-3">
+                <label for="nama_matkul">Nama Mata Kuliah : </label>
+                <input type="text" class="form-control" id="nama_matkul" name='nama_matkul'>
+            </div>
+            
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+           <button type="submit" class="btn btn-primary">Save</button>
+         </div>
+       </div>
+     </div>
+    </div>
+</form>
+
+<!-- Edit Product Modal-->
+<form action="/updateMatkul" method="post">
+    <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">Edit Mata Kuliah</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <div class="modal-body">
+           <div class="form-group">
+               <input type="text" name="kode_matkul" class="form-control kode_matkul" placeholder="Kode Mata Kuliah" required>
+           </div>
+
+           <div class="form-group">
+               <input type="text" name="nama_matkul" class="form-control nama_matkul" placeholder="Nama Mata Kuliah" required>
+           </div>
+         </div>
+         <div class="modal-footer">
+           <input type="hidden" name="id" class="product_id">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+           <button type="submit" class="btn btn-primary">Update</button>
+         </div>
+       </div>
+     </div>
+    </div>
+</form>
+
+<!-- Delete Product Modal-->
+<form id="add-row-form" action="/deleteMatkul" method="post">
+  <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="myModalLabel">Delete Product</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                   <strong>Delete Mata Kuliah Tersebut?</strong>
+            </div>
+            <div class="modal-footer">
+                 <input type="hidden" name="kode_matkul" class="form-control kode_matkul2" required>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                 <button type="submit" class="btn btn-success">Delete</button>
+            </div>
+         </div>
+     </div>
+  </div>
+</form>
+<%- include('base/matkulModal') %>
+<%- include('base/footer') %>
+   

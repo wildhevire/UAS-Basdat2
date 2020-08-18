@@ -1,0 +1,30 @@
+<script>
+    $(document).ready(function(){
+			//showing data to modal for edit record
+      $('#mytable').on('click','.edit',function(){
+        var nim = $(this).data('nim');
+        var nama = $(this).data('nama');
+        var password = $(this).data('password');
+        var email = $(this).data('email');
+        var tempat_lahir = $(this).data('tempat_lahir');
+        var tanggal_lahir = $(this).data('tanggal_lahir');
+        var alamat = $(this).data('alamat');
+        $('#EditModal').modal('show');
+        $('.nim').val(nim);
+        $('.nama').val(nama);
+        $('.password').val(password);
+        $('.email').val(email);
+        $('.tempat_lahir').val(tempat_lahir);
+        $('.tanggal_lahir').val(tanggal_lahir);
+        $('.alamat').val(alamat);
+      });
+
+			//showing modal for delete record
+			$('#mytable').on('click','.delete',function(){
+        var nim = $(this).data('nim');
+        $('#DeleteModal').modal('show');
+        $('.nim').val(nim);
+      });
+
+    });
+</script>
