@@ -1,0 +1,123 @@
+<%- include('base/header') %>
+
+<% if (typeof userType != 'undefined' && userType=='mahasiswa') { %>
+    <div class="container mt-4">
+            <div class="card">
+                <div class="card-header">
+                    Profile Mahasiswa
+                </div>
+                <div class="card-body">
+                    <form action="/updateMahasiswa" method="POST">
+                                 
+                        <div class="form-group">
+                            <label for="nim">NIM : </label>
+                            <input type="text" class="form-control nim" id="nim" name='nim' value='<%= results.nim%>' readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="nama">Nama :</label>
+                            <input type="text" class="form-control nama" id="nama" name='nama' value='<%= results.nama%>' required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="password">Password : </label>
+                            <div class="input-group " id ="show_hide_password">
+                                <input type="password" class="form-control password" id="password" name='password' value='<%= results.password%>' required>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button"  ><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nama">Email :</label>
+                            <input type="email" class="form-control email" id="email" name='email' value='<%= results.email%>' required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tanggal_lahir">Tanggal Lahir :</label>
+                            <input type="date" class="form-control tanggal_lahir" id="tanggal_lahir" name='tanggal_lahir' value='<%= results.tanggal_lahir%>' required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tempat_lahir">Tempat Lahir :</label>
+                            <input type="text" class="form-control tempat_lahir" id="tempat_lahir" name='tempat_lahir' value='<%= results.tempat_lahir%>' required>
+                        </div>
+                        <div class="form-group">
+                            <label for="alamat">Alamat :</label>
+                            <input type="text" class="form-control alamat" id="alamat" name='alamat' value='<%= results.alamat%>' required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+                </div>
+            </div>  
+            <% if (typeof message != 'undefined') { %>
+              <h4 class="alert alert-danger mt-4"><%= message %></h4>
+            <% } %>
+            
+            <% if (typeof isSucces != 'undefined') { %>
+              <h4 class="alert alert-success mt-4"><%= isSucces %></h4>
+            <% } %>               
+    </div>
+    
+<% } %>
+
+<% if (typeof userType != 'undefined' && userType=='dosen') { %>
+    <div class="container mt-4">
+            <div class="card">
+                <div class="card-header">
+                    Profile Dosen
+                </div>
+                <div class="card-body">
+                    <form action="/updateDosen" method="POST">
+                                 
+                        <div class="form-group">
+                            <label for="nim">NIP : </label>
+                            <input type="text" class="form-control nim" id="nim" name='nim' value='<%= results.nip%>' readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="nama">Nama :</label>
+                            <input type="text" class="form-control nama" id="nama" name='nama' value='<%= results.nama%>' required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="password">Password : </label>
+                            <div class="input-group " id ="show_hide_password">
+                                <input type="password" class="form-control password" id="password" name='password' value='<%= results.password%>' required>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button"  ><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nama">Email :</label>
+                            <input type="email" class="form-control email" id="email" name='email' value='<%= results.email%>' required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tanggal_lahir">Tanggal Lahir :</label>
+                            <input type="date" class="form-control tanggal_lahir" id="tanggal_lahir" name='tanggal_lahir' value='<%= results.tanggal_lahir%>' required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tempat_lahir">Tempat Lahir :</label>
+                            <input type="text" class="form-control tempat_lahir" id="tempat_lahir" name='tempat_lahir' value='<%= results.tempat_lahir%>' required>
+                        </div>
+                        <div class="form-group">
+                            <label for="alamat">Alamat :</label>
+                            <input type="text" class="form-control alamat" id="alamat" name='alamat' value='<%= results.alamat%>' required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+                </div>
+            </div>
+            <% if (typeof message != 'undefined') { %>
+              <h4 class="alert alert-danger mt-4"><%= message %></h4>
+            <% } %>
+            
+            <% if (typeof isSucces != 'undefined') { %>
+              <h4 class="alert alert-success mt-4"><%= isSucces %></h4>
+            <% } %>               
+    </div>
+<% } %>
+    
+ 
+
+
+
+<%- include('base/footer') %>
+   

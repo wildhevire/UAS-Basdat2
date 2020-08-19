@@ -12,6 +12,11 @@
             <li><a href="/dosen">Dosen</a></li>
             <li><a href="/matkul">Mata Kuliah</a></li>
         <% } %>
+
+        <% if (typeof userType != 'undefined' && (userType == 'mahasiswa' || userType == 'dosen')) { %>
+            <li><a href="/profile">Profile</a></li>
+            
+        <% } %>
           
         <% if (typeof userType != 'undefined') { %>
             <li><a href="/logout">Logout</a></li>

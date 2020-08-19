@@ -13,7 +13,7 @@ router.get("/",  (req, res) =>{
   if(req.session.userType == "admin"){
     res.render('home', {userType : "admin"});
   } else if(req.session.userType == "mahasiswa"){
-    rres.render('home', {userType : "mahasiswa"});
+    res.render('home', {userType : "mahasiswa"});
   } else if(req.session.userType == "dosen"){
     res.render('home', {userType : "dosen"});
   }else return res.redirect('/login');
@@ -23,6 +23,8 @@ router.get("/",  (req, res) =>{
 router.get("/login", (req, res) =>{
   res.render('login');
 });
+
+router.get("/profile", auth.profile);
 
 //Admin
 router.post("/auth/login/admin", auth.loginAdmin);
@@ -40,6 +42,7 @@ router.post("/auth/addMatkul", matkulController.add);
 
 
 //Dosen
+router.post("/auth/login/dosen", auth.loginDosen);
 router.get("/dosen", dosenController.selectAll);
 router.post("/updateDosen", dosenController.update);
 router.post("/deleteDosen", dosenController.delete);
@@ -47,6 +50,7 @@ router.post("/auth/addDosen", dosenController.add);
 
 
 //Mahasiswa
+router.post("/auth/login/mahasiswa", auth.loginMahasiswa);
 router.get("/mahasiswa", mahasiswaController.selectAll);
 router.post("/updateMahasiswa", mahasiswaController.update);
 router.post("/deleteMahasiswa", mahasiswaController.delete);

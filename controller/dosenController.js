@@ -47,6 +47,8 @@ let selectAll = (req, res) =>{
   });
 }
 
+
+
 let update = (req, res) => {
   let {nip, nama, password, email, tempat_lahir, tanggal_lahir, alamat} = req.body;
   
