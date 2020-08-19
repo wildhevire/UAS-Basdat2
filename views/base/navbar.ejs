@@ -14,8 +14,12 @@
         <% } %>
 
         <% if (typeof userType != 'undefined' && (userType == 'mahasiswa' || userType == 'dosen')) { %>
+            <li><a href="/matkul">Mata Kuliah</a></li>
+        <% } %> 
+
+        <% if (typeof userType != 'undefined' && (userType == 'mahasiswa' || userType == 'dosen')) { %>
             <li><a href="/profile">Profile</a></li>
-            
+            <li><a href="/perkuliahan">Perkuliahan</a></li>
         <% } %>
           
         <% if (typeof userType != 'undefined') { %>

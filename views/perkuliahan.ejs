@@ -1,0 +1,99 @@
+<%- include('base/header') %>
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            Perkuliahan
+        </div>
+        <div class="card-body">
+            
+            <table class="table table-striped" id="mytable">
+                <thead>
+                  <tr>
+                    <th>Kode Mata Kuliah</th>
+                    <th>Nama Mata Kuliah</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for (let i = 0; i < resultMatkul.length; i++) { %>
+                    <tr>
+                       <td><%= resultMatkul[i].kode_matkul %></td>
+                       <td><%= resultMatkul[i].nama_matkul %></td>
+                       <td>
+                       <% if(userType == 'dosen') { %>
+                        
+                         <a href="javascript:void(0);" class="btn btn-sm btn-info buat" data-kode_matkul="<%= resultMatkul[i].kode_matkul %>" data-nama_matkul="<%= resultMatkul[i].nama_matkul%>" data-nip='<%= userId %>'>Buat Perkuliahan</a>
+                       <% } else if(userType = 'mahasiswa'){ %>
+                         <a href="javascript:void(0);" class="btn btn-sm btn-info masuk" data-nim="<%= userId %>" data-perkuliahan_id="<%= resultPerkuliahan.perkuliahan_id; %>" data-kode_matkul="<%= resultMatkul[i].kode_matkul %>'>Masuk A</a>
+                       <% } %>
+                       </td>
+                    </tr>
+                   <% } %>
+                </tbody>
+
+              </table>
+              <button class="btn btn-success" data-toggle="modal" data-target="#myModalAdd">Tambah Mata Kuliah</button>
+    
+        </div>
+    </div> 
+    <% if (typeof message != 'undefined') { %>
+      <h4 class="alert alert-danger mt-4"><%= message %></h4>
+    <% } %>
+    
+    <% if (typeof isSucces != 'undefined') { %>
+      <h4 class="alert alert-success mt-4"><%= isSucces %></h4>
+    <% } %>   
+           
+</div>
+
+<!-- Buat Perkuliahan Modal -->
+<form id="add-row-form" action="/auth/addPerkuliahan" method="post">
+  <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="myModalLabel">Buat Perkuliahan Mata Kuliah</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                   <strong>Buat Perkuliahan Mata Kuliah Tersebut?</strong>
+            </div>
+            <div class="modal-footer">
+                 <input type="hidden" name="kode_matkul" class="form-control kode_matkul2" required>
+                 <input type="hidden" name="nip" class="form-control nip" required>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                 <button type="submit" class="btn btn-success">Delete</button>
+            </div>
+         </div>
+     </div>
+  </div>
+</form>
+
+<!-- Masuk Perkuliahan Modal -->
+<form id="add-row-form" action="/auth/masukPerkuliahan" method="post">
+  <div class="modal fade" id="MasukModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="myModalLabel">Masuk Perkuliahan</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                   <strong>Masuk Perkuliahan Tersebut?</strong>
+            </div>
+            <div class="modal-footer">
+                 <input type="hidden" name="perkuliahan_id" class="form-control perkuliahan_id" required>
+                 <input type="hidden" name="nim" class="form-control nim" required>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                 <button type="submit" class="btn btn-success">Delete</button>
+            </div>
+         </div>
+     </div>
+  </div>
+</form>
+
+
+<%- include('base/perkuliahanModal') %>
+<%- include('base/footer') %>
+   

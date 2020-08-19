@@ -7,6 +7,7 @@ const matkulController = require('./matkulController');
 const dosenController = require('./dosenController');
 const mahasiswaController = require('./mahasiswaController');
 const adminController = require('./adminController');
+const perkuliahanController = require('./perkuliahanController');
 
 
 router.get("/",  (req, res) =>{
@@ -55,6 +56,15 @@ router.get("/mahasiswa", mahasiswaController.selectAll);
 router.post("/updateMahasiswa", mahasiswaController.update);
 router.post("/deleteMahasiswa", mahasiswaController.delete);
 router.post("/auth/addMahasiswa", mahasiswaController.add);
+
+
+//Perkuliahan
+router.get("/perkuliahan", perkuliahanController.selectAll);
+router.post("/updateMahasiswa", perkuliahanController.update);
+router.post("/deleteMahasiswa", perkuliahanController.delete);
+router.post("/auth/addPerkuliahan", perkuliahanController.add);
+router.post("/auth/masukPerkuliahan", perkuliahanController.masuk);
+
 
 
 router.get("/addMahasiswa", (req, res) =>{

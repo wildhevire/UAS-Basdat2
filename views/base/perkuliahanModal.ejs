@@ -1,0 +1,23 @@
+<script>
+$(document).ready(function(){
+  //showing data to modal for edit record
+  $('#mytable').on('click','.masuk',function(){
+    var nim = $(this).data('nim');
+    var perkuliahan_id = $(this).data('perkuliahan_id');
+    $('#EditModal').modal('show');
+    $('.perkuliahan_id').val(perkuliahan_id);
+    $('.nim').val(nim);
+  });
+
+  //showing modal for delete record
+  $('#mytable').on('click','.buat',function(){
+    var kode_matakul = $(this).data('kode_matkul');
+    var nip = $(this).data('nip');
+    $('#MasukModal').modal('show');
+    $('.kode_matkul2').val(kode_matakul);
+    $('.nip').val(nip);
+  });
+
+});
+
+</script>
